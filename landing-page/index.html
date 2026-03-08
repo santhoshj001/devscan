@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevScan - Reclaim Your Mac's Disk Space</title>
+    <meta name="description" content="Find every dev project on your Mac, know what's stale, safely clean up, and reclaim your disk.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="grid-overlay"></div>
+
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <i class="ph-fill ph-radar"></i>
+                <span>DevScan</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How it Works</a>
+                <a href="https://github.com/SanthoshJ/devscan" target="_blank" class="nav-btn">
+                    <i class="ph-fill ph-github-logo"></i> GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="hero-badge reveal-up">
+                        <span class="badge-dot"></span>
+                        <span>v1.0 is now live</span>
+                    </div>
+                    <h1 class="hero-title reveal-up delay-1">
+                        Reclaim your Mac's <br>
+                        <span class="gradient-text">Disk Space</span> safely.
+                    </h1>
+                    <p class="hero-subtitle reveal-up delay-2">
+                        DevScan automatically discovers every dev project, analyzes its health, and provides a guided workflow to clean up GBs of old <code>node_modules</code>, builds, and Docker bloat without losing uncommitted work.
+                    </p>
+                    <div class="hero-cta reveal-up delay-3">
+                        <div class="install-card">
+                            <div class="terminal-header">
+                                <div class="mac-dots">
+                                    <span class="dot close"></span>
+                                    <span class="dot min"></span>
+                                    <span class="dot max"></span>
+                                </div>
+                                <span class="term-title">bash</span>
+                            </div>
+                            <div class="terminal-body">
+                                <code><span class="prompt">$</span> npx devscan@latest</code>
+                                <button class="copy-btn" id="copyBtn" title="Copy to clipboard">
+                                    <i class="ph ph-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-stats reveal-up delay-4">
+                        <div class="stat-item"><i class="ph-fill ph-hard-drives"></i> Recover GBs</div>
+                        <div class="stat-item"><i class="ph-fill ph-git-branch"></i> 100% Git Safety</div>
+                        <div class="stat-item"><i class="ph-fill ph-apple-logo"></i> macOS Native</div>
+                    </div>
+                </div>
+
+                <div class="hero-visual reveal-scale delay-2">
+                    <div class="dashboard-mockup">
+                        <div class="mockup-header">
+                            <div class="mac-dots">
+                                <span class="dot close"></span>
+                                <span class="dot min"></span>
+                                <span class="dot max"></span>
+                            </div>
+                            <div class="mockup-search">
+                                <i class="ph ph-magnifying-glass"></i> Search 47 projects...
+                            </div>
+                        </div>
+                        <div class="mockup-body">
+                            <div class="m-sidebar">
+                                <div class="m-nav-item active"><i class="ph-fill ph-squares-four"></i> Dashboard</div>
+                                <div class="m-nav-item"><i class="ph-fill ph-folder"></i> Projects</div>
+                                <div class="m-nav-item"><i class="ph-fill ph-docker-logo"></i> System</div>
+                                
+                                <div class="m-disk-widget">
+                                    <span>Disk Space</span>
+                                    <div class="m-progress"><div class="m-fill" style="width: 84%"></div></div>
+                                    <small>84% Full</small>
+                                </div>
+                            </div>
+                            <div class="m-main">
+                                <div class="m-cards">
+                                    <div class="m-card warning">
+                                        <div class="m-c-title">Stale</div>
+                                        <div class="m-c-val">15</div>
+                                    </div>
+                                    <div class="m-card danger">
+                                        <div class="m-c-title">Abandoned</div>
+                                        <div class="m-c-val">12</div>
+                                    </div>
+                                    <div class="m-card brand">
+                                        <div class="m-c-title">Reclaimable</div>
+                                        <div class="m-c-val">34.7 GB</div>
+                                    </div>
+                                </div>
+                                <div class="m-list">
+                                    <div class="m-row safe">
+                                        <div class="m-col m-name"><i class="ph-fill ph-folder"></i> old-react-dashboard</div>
+                                        <div class="m-col"><span class="m-badge m-abandoned">Abandoned</span></div>
+                                        <div class="m-col">850 MB</div>
+                                        <div class="m-col m-btn-col"><div class="m-btn m-trash">Trash</div></div>
+                                    </div>
+                                    <div class="m-row danger">
+                                        <div class="m-col m-name"><i class="ph-fill ph-folder"></i> hackathon-api</div>
+                                        <div class="m-col"><span class="m-badge m-attention">Needs Attention</span></div>
+                                        <div class="m-col">1.2 GB</div>
+                                        <div class="m-col m-btn-col"><div class="m-btn m-push">Git Push</div></div>
+                                    </div>
+                                    <div class="m-row warning">
+                                        <div class="m-col m-name"><i class="ph-fill ph-folder"></i> personal-blog</div>
+                                        <div class="m-col"><span class="m-badge m-stale">Stale</span></div>
+                                        <div class="m-col">1.5 GB</div>
+                                        <div class="m-col m-btn-col"><div class="m-btn m-clean">Clean</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-header reveal-up">
+                    <h2>Powerful, intelligent, <br>and completely local.</h2>
+                    <p>Powered by the Model Context Protocol (MCP) to analyze your filesystem quickly.</p>
+                </div>
+                
+                <div class="bento-grid">
+                    <div class="bento-card col-span-2 reveal-up">
+                        <div class="bento-icon"><i class="ph-fill ph-brain"></i></div>
+                        <h3>Smart Classification</h3>
+                        <p>We analyze modification dates, git commits, and dependencies to magically group projects into states.</p>
+                        <div class="status-badges mt-4">
+                            <span class="badge active"><i class="ph-fill ph-check-circle"></i> Active</span>
+                            <span class="badge idle"><i class="ph-fill ph-moon"></i> Idle</span>
+                            <span class="badge stale"><i class="ph-fill ph-warning-circle"></i> Stale</span>
+                            <span class="badge abandoned"><i class="ph-fill ph-skull"></i> Abandoned</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bento-card col-span-1 reveal-up delay-1">
+                        <div class="bento-icon"><i class="ph-fill ph-shield-check"></i></div>
+                        <h3>Zero Data Loss</h3>
+                        <p>DevScan prevents deleting anything with unpushed or uncommitted git changes. Clean up with absolute confidence.</p>
+                    </div>
+
+                    <div class="bento-card col-span-1 reveal-up">
+                        <div class="bento-icon"><i class="ph-fill ph-broom"></i></div>
+                        <h3>Ditch the Bloat</h3>
+                        <p>Quickly locate and nuke dense directories like <code>node_modules</code>, <code>build/</code>, <code>.gradle/</code>, and <code>venv/</code> with a single click.</p>
+                    </div>
+
+                    <div class="bento-card col-span-2 reveal-up delay-1">
+                        <div class="bento-icon"><i class="ph-fill ph-docker-logo"></i></div>
+                        <h3>System-Wide Cleanup</h3>
+                        <p>Not just projects. DevScan finds dangling Docker images, unused containers, and heavy global caches eating up your SSD.</p>
+                        <div class="cleanup-visual mt-4">
+                            <div class="progress-bar">
+                                <div class="progress-fill warning" style="width: 85%;"></div>
+                                <div class="progress-fill success animate-shrink"></div>
+                            </div>
+                            <div class="cleanup-text flex-between">
+                                <span>Used: 843 GB</span>
+                                <span class="success-text">-42.5 GB (Reclaiming)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <div class="section-header reveal-up">
+                    <h2>How it gets the job done</h2>
+                </div>
+                
+                <div class="steps-container">
+                    <div class="step reveal-up">
+                        <div class="step-number">01</div>
+                        <h3>Rapid Scan</h3>
+                        <p>Run the CLI. DevScan recursively searches your directories for 15+ different project types, intelligently bypassing nested dependencies.</p>
+                    </div>
+                    <div class="step display-arrow reveal-up delay-1">
+                        <i class="ph ph-arrow-right"></i>
+                    </div>
+                    <div class="step reveal-up delay-2">
+                        <div class="step-number">02</div>
+                        <h3>Analyze & Classify</h3>
+                        <p>Checks filesystem metadata and shells out to Git to evaluate project health, generating a local JSON report instantly.</p>
+                    </div>
+                    <div class="step display-arrow reveal-up delay-3">
+                        <i class="ph ph-arrow-right"></i>
+                    </div>
+                    <div class="step reveal-up delay-4">
+                        <div class="step-number">03</div>
+                        <h3>Review & Clean</h3>
+                        <p>A beautiful local web dashboard launches allowing you to review suggestions, push git work, or move stale projects to the macOS Trash.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section reveal-scale">
+            <div class="container container-sm">
+                <div class="cta-box">
+                    <h2>Ready to get your space back?</h2>
+                    <p>Free, open-source, and 100% local. Your data never leaves your machine.</p>
+                    <div class="install-card dark mx-auto mt-4">
+                        <div class="terminal-body">
+                            <code><span class="prompt">$</span> npx devscan@latest</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-left">
+                <div class="logo">
+                    <i class="ph-fill ph-radar"></i> DevScan
+                </div>
+                <p>Designed and built for developers on macOS.</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://github.com/SanthoshJ/devscan" target="_blank" class="footer-link"><i class="ph-fill ph-github-logo"></i> GitHub</a>
+                <a href="#" class="footer-link"><i class="ph-fill ph-twitter-logo"></i> Twitter</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                &copy; 2026 Santhosh J. Released under the MIT License.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
